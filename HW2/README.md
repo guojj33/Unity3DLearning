@@ -2,7 +2,8 @@
 
 ### 演示视频
 
-<a href="" target="_blank">视频</a>
+<a href="https://www.ixigua.com/i6736058652848816140/" target="_blank">视频链接</a>  
+<a href="https://github.com/guojj33/Unity3DLearning/blob/master/HW2/assets/TicTacToe.mp4" target="_blank">(备用链接)</a>
 
 ### 环境
 * Unity 5.5.0f3(64bit)
@@ -18,6 +19,6 @@
 
 ### 运行结果
 * #### 一方获胜  
-![](assets/game.PNG)
+![game.PNG](assets/game.PNG)
 * #### 平手  
-![](assets/tie.jpg)
+![tie.jpg](assets/tie.jpg)
