@@ -2,7 +2,13 @@
 
 ### 演示视频
 [视频地址]()  
-([备用地址]())
+([备用地址](https://github.com/guojj33/Unity3DLearning/blob/master/HW3/assets/PriestsAndDevils.mp4))
+
+### 文件说明
+
+* 预设放在 [PriestsAndDevils/Assets/Resources/Prefabs](https://github.com/guojj33/Unity3DLearning/tree/master/HW3/PriestsAndDevils/Assets/Resources/Prefabs) 中
+* 代码放在 [PriestsAndDevils/Assets/Scripts](https://github.com/guojj33/Unity3DLearning/tree/master/HW3/PriestsAndDevils/Assets/Scripts) 中
+* 双击 PriestsAndDevils/Assets/2.unity 即可打开工程
 
 ### 游戏脚本
 
