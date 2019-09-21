@@ -1,8 +1,9 @@
 ## Priests and Devils 牧师与魔鬼
 
 ### 演示视频
-[视频地址]()  
-([备用地址](https://github.com/guojj33/Unity3DLearning/blob/master/HW3/assets/PriestsAndDevils.mp4))
+
+<a href = "">视频地址</a>  
+(<a href = "https://github.com/guojj33/Unity3DLearning/blob/master/HW3/assets/PriestsAndDevils.mp4" target = "_blank" >备用地址</a>)
 
 ### 文件说明
 
