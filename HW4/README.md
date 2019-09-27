@@ -254,7 +254,7 @@ public class MySceneActionManager : SSActionManager  //本游戏管理器
 
 ### 新增裁判类
 - 裁判事件接口  
-控制器与裁判交互的接口。由控制器继承后，裁判判定当前战局后，通过回调函数 JudgeEven() 通知控制器。  
+控制器与裁判交互的接口。由控制器继承后，裁判判定当前战局后，通过回调函数 JudgeEvent() 通知控制器。  
 ```C#
     public interface IJudgeCallback
     {
