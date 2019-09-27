@@ -17,7 +17,7 @@ public class Judge : MonoBehaviour
     public IJudgeCallback callback;
     public Controller sceneController;
 
-	void Start ()
+	void Start ()	//初始化写在 Start() 中防止出问题
 	{
 		sceneController = (Controller)SSDirector.getInstance().CurrentSceneController;
 		startLand = sceneController.startLand;

@@ -354,3 +354,29 @@ Controller 的重置函数需要增加运行 SSActionManager 的重置函数，�
 		actions.Clear ();
 	}
 ```
+
+- 成员变量 sceneController 初始化  
+一开始直接在变量声明处直接初始化产生了 ``NullReferenceException: Object reference not set to an instance of an object`` 的错误。  
+全部移到 Start() 中问题就解决了。  
+```C#
+public class Judge : MonoBehaviour
+    {
+        landModel startLand;
+        landModel endLand;
+        boatModel boat;
+        public IJudgeCallback callback;
+        public Controller sceneController;
+
+        void Start ()	//初始化写在 Start() 中防止出问题
+        {
+            sceneController = (Controller)SSDirector.getInstance().CurrentSceneController;
+            startLand = sceneController.startLand;
+            endLand = sceneController.endLand;
+            boat = sceneController.boat;
+            callback = sceneController;
+            sceneController.judge = this;
+        }
+
+        //....
+    }
+```
