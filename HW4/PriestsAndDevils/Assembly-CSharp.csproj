@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Actions.cs" />
      <Compile Include="Assets\Scripts\Controller.cs" />
+     <Compile Include="Assets\Scripts\Judge.cs" />
      <Compile Include="Assets\Scripts\Model.cs" />
      <Compile Include="Assets\Scripts\UserGUI.cs" />
  <Reference Include="UnityEngine.Advertisements">

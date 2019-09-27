@@ -251,7 +251,94 @@ public class MySceneActionManager : SSActionManager  //本游戏管理器
 		}
 	}
 ```
-### 细节处理
+
+### 新增裁判类
+- 裁判事件接口  
+控制器与裁判交互的接口。由控制器继承后，裁判判定当前战局后，通过回调函数 JudgeEven() 通知控制器。  
+```C#
+    public interface IJudgeCallback
+    {
+        void JudgeEvent(JudgeEventType events);
+    }
+```
+
+- 裁判类  
+在 Update() 中实时检测当前状况，并调用回调函数通知控制器。  
+```C#
+    public class Judge : MonoBehaviour
+    {
+        landModel startLand;
+        landModel endLand;
+        boatModel boat;
+        public IJudgeCallback callback;
+        public Controller sceneController;
+
+        void Start ()
+        {
+            sceneController = (Controller)SSDirector.getInstance().CurrentSceneController;
+            startLand = sceneController.startLand;
+            endLand = sceneController.endLand;
+            boat = sceneController.boat;
+            callback = sceneController;
+            sceneController.judge = this;
+        }
+
+        protected void Update ()
+        {
+            int[] startLandCount = startLand.getRoleCount ();
+            int[] endLandCount = endLand.getRoleCount ();
+            int[] boatCount = boat.getRoleCount ();
+
+            int startPriestsCount = startLandCount[0];	//including roles on boat if the boat is at the same side
+            int startDevilsCount = startLandCount[1];
+
+            int endPriestsCount = endLandCount[0];
+            int endDevilsCount = endLandCount[1];
+            
+            int boatPriestsCount = boatCount[0];
+            int boatDevilsCount = boatCount[1];
+
+            if (boat.getBoatFlag () == 1) {
+                startPriestsCount += boatPriestsCount;
+                startDevilsCount += boatDevilsCount;
+            }
+            else if (boat.getBoatFlag () == -1) {
+                endPriestsCount += boatPriestsCount;
+                endDevilsCount += boatDevilsCount;
+            }
+
+            if ((startPriestsCount > 0 && startDevilsCount > startPriestsCount) || (endPriestsCount > 0 && endDevilsCount > endPriestsCount)){	//lose
+                callback.JudgeEvent (JudgeEventType.lose);
+            }
+            else if (startDevilsCount + startPriestsCount == 0 && endPriestsCount + endDevilsCount == 6 && boatPriestsCount == 0 && boatDevilsCount == 0) {	//win
+                callback.JudgeEvent (JudgeEventType.win);
+            }
+            else callback.JudgeEvent (JudgeEventType.unfinish);	//continue playing
+        }
+    }
+```
+
+- 控制器实现裁判事件接口  
+控制器接收裁判的消息并作相应处理。  
+```C#
+	public void JudgeEvent (JudgeEventType type) {
+		judgement = type;
+		if (type == JudgeEventType.unfinish) {	//continue
+			userGui.guiFlag = guiFlagType.unfinish;
+		}
+		else if (type == JudgeEventType.win) {	//win
+			userGui.guiFlag = guiFlagType.win;
+		}
+		else if (type == JudgeEventType.lose) {	//lose
+			userGui.guiFlag = guiFlagType.lose;
+		}
+	}
+```
+### 细节与改进
+- 使用枚举变量使代码更易读  
+```C#
+    public enum JudgeEventType : int { lose, win, unfinish }
+```
 
 - 重置游戏时中断正在执行的动作  
 Controller 的重置函数需要增加运行 SSActionManager 的重置函数，清楚所有正在执行和将要执行的动作，防止在对象仍在移动时重置对象的位置后又继续执行移动操作。  

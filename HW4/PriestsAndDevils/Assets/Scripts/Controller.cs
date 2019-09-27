@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using myGame;
 
-public class Controller : MonoBehaviour, ISceneController, IUserAction {
+public class Controller : MonoBehaviour, ISceneController, IUserAction, IJudgeCallback {
 	public landModel startLand;
 	public landModel endLand;
 	public boatModel boat;
 	private roleModel[] roles;
 
+	private JudgeEventType judgement = JudgeEventType.unfinish;
+
+	public Judge judge;
 	UserGUI userGui;
 
 	public MySceneActionManager actionManager;
@@ -18,30 +21,34 @@ public class Controller : MonoBehaviour, ISceneController, IUserAction {
 		director.CurrentSceneController = this;
 		userGui = gameObject.AddComponent<UserGUI> () as UserGUI;
 		actionManager = gameObject.AddComponent<MySceneActionManager>() as MySceneActionManager;
+		judge = gameObject.AddComponent<Judge>() as Judge;
 		loadResources ();
 	}
 
 	void Update () {
 		updateBoatClickReaction ();
 		updateRolesClickReaction ();
-		if(userGui.guiFlag == 0) {
-			Debug.Log ("LateUpdate(): userGUi.guiFlag = " + userGui.guiFlag);
+		if(userGui.guiFlag == guiFlagType.restart) {
 			restart ();
-			userGui.guiFlag = 1;
+			userGui.guiFlag = guiFlagType.unfinish;
 		}
-		if (check() == 0) {	//continue
-			userGui.guiFlag = 1;
+	}
+
+	public void JudgeEvent (JudgeEventType type) {
+		judgement = type;
+		if (type == JudgeEventType.unfinish) {	//continue
+			userGui.guiFlag = guiFlagType.unfinish;
 		}
-		else if (check() == 1) {	//win
-			userGui.guiFlag = 2;
+		else if (type == JudgeEventType.win) {	//win
+			userGui.guiFlag = guiFlagType.win;
 		}
-		else if (check() == -1) {	//lose
-			userGui.guiFlag = 3;
+		else if (type == JudgeEventType.lose) {	//lose
+			userGui.guiFlag = guiFlagType.lose;
 		}
 	}
 
 	void updateBoatClickReaction () {
-		if (check() != 0) {
+		if (judgement != JudgeEventType.unfinish) {	//win or lose
 			boat.shutDownClickReaction ();
 			return;
 		}
@@ -55,7 +62,7 @@ public class Controller : MonoBehaviour, ISceneController, IUserAction {
 	}
 
 	void updateRolesClickReaction () {
-		if (boat.isMoving () || check () != 0) {
+		if (boat.isMoving () || judgement != JudgeEventType.unfinish) {
 			for (int i = 0; i < roles.Length; ++i) {
 				roles[i].shutDownClickReaction();
 			}
@@ -145,35 +152,35 @@ public class Controller : MonoBehaviour, ISceneController, IUserAction {
 		}
 	}
 
-	public int check() {
-		int[] startLandCount = startLand.getRoleCount ();
-		int[] endLandCount = endLand.getRoleCount ();
-		int[] boatCount = boat.getRoleCount ();
+	// public int check() {
+	// 	int[] startLandCount = startLand.getRoleCount ();
+	// 	int[] endLandCount = endLand.getRoleCount ();
+	// 	int[] boatCount = boat.getRoleCount ();
 
-		int startPriestsCount = startLandCount[0];	//including roles on boat if the boat is at the same side
-		int startDevilsCount = startLandCount[1];
+	// 	int startPriestsCount = startLandCount[0];	//including roles on boat if the boat is at the same side
+	// 	int startDevilsCount = startLandCount[1];
 
-		int endPriestsCount = endLandCount[0];
-		int endDevilsCount = endLandCount[1];
+	// 	int endPriestsCount = endLandCount[0];
+	// 	int endDevilsCount = endLandCount[1];
 		
-		int boatPriestsCount = boatCount[0];
-		int boatDevilsCount = boatCount[1];
+	// 	int boatPriestsCount = boatCount[0];
+	// 	int boatDevilsCount = boatCount[1];
 
-		if (boat.getBoatFlag () == 1) {
-			startPriestsCount += boatPriestsCount;
-			startDevilsCount += boatDevilsCount;
-		}
-		else if (boat.getBoatFlag () == -1) {
-			endPriestsCount += boatPriestsCount;
-			endDevilsCount += boatDevilsCount;
-		}
+	// 	if (boat.getBoatFlag () == 1) {
+	// 		startPriestsCount += boatPriestsCount;
+	// 		startDevilsCount += boatDevilsCount;
+	// 	}
+	// 	else if (boat.getBoatFlag () == -1) {
+	// 		endPriestsCount += boatPriestsCount;
+	// 		endDevilsCount += boatDevilsCount;
+	// 	}
 
-		if ((startPriestsCount > 0 && startDevilsCount > startPriestsCount) || (endPriestsCount > 0 && endDevilsCount > endPriestsCount)){	//lose
-			return -1;
-		}
-		else if (startDevilsCount + startPriestsCount == 0 && endPriestsCount + endDevilsCount == 6 && boatPriestsCount == 0 && boatDevilsCount == 0) {	//win
-			return 1;
-		}
-		return 0;	//continue playing
-	}
+	// 	if ((startPriestsCount > 0 && startDevilsCount > startPriestsCount) || (endPriestsCount > 0 && endDevilsCount > endPriestsCount)){	//lose
+	// 		return -1;
+	// 	}
+	// 	else if (startDevilsCount + startPriestsCount == 0 && endPriestsCount + endDevilsCount == 6 && boatPriestsCount == 0 && boatDevilsCount == 0) {	//win
+	// 		return 1;
+	// 	}
+	// 	return 0;	//continue playing
+	// }
 }
