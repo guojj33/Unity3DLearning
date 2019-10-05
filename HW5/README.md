@@ -2,7 +2,7 @@
 
 ### 演示视频
 
-<a href = "">视频地址</a>  
+<a href = "https://www.ixigua.com/i6744272121704218635/">视频地址</a>  
 (<a href = "https://github.com/guojj33/Unity3DLearning/blob/master/HW5/assets/HitUFO.mp4" target = "_blank" >备用地址</a>)
 
 ### 文件说明
