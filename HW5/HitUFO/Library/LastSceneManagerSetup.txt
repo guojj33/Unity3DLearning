@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/ufo.unity
+- path: C:/Users/JJ/Desktop/HitUFO/Assets/ufo.unity
   isLoaded: 1
   isActive: 1
