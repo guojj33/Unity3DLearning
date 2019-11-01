@@ -7,9 +7,9 @@
 
 ### 文件说明
 
-- 代码放在 [Patrol/Assets/Scripts](https://github.com/guojj33/Unity3DLearning/tree/master/HW7/Patrol/Assets/Scripts) 中
-- 素材在 [Patrol/Assets/Resources](https://github.com/guojj33/Unity3DLearning/tree/master/HW7/Patrol/Assets/Resources)
-- 工程下载到本地后，双击 HitUFO/Assets/1.unity 即可打开工程
+- 代码放在 [patrol/Assets/Scripts](https://github.com/guojj33/Unity3DLearning/tree/master/HW7/patrol/Assets/Scripts) 中
+- 素材在 [patrol/Assets/Resources](https://github.com/guojj33/Unity3DLearning/tree/master/HW7/patrol/Assets/Resources)
+- 工程下载到本地后，双击 patrol/Assets/1.unity 即可打开工程
 
 ### 游戏要求
 - 游戏设计要求：
