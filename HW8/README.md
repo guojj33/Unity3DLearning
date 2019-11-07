@@ -8,11 +8,11 @@
 ### 制作过程
 
 #### 结构分析  
-- 粒子光环由内外两层粒子构成。外层粒子分布范围更广，旋转速度更快。内层粒子分布范围窄，旋转速度更慢。
+- 粒子光环由内外两层粒子构成。外层粒子分布范围更广，旋转速度更快。内层粒子分布范围窄，旋转速度更慢。  
 ![](assets/halo.gif)
-- 如图创建 3 个空对象
+- 如图创建 3 个空对象  
 ![](assets/halo.PNG)
-- 给 Inner 和 Outer 添加 Particle System 组件，都做如图设置。
+- 给 Inner 和 Outer 添加 Particle System 组件，都做如图设置。  
 ![](assets/particle.PNG)
 
 #### 代码设计
@@ -37,6 +37,7 @@
 - InnerHalo.cs  
     - 粒子系统初始化  
     赋予每一个粒子半径和角度值，确定粒子的位置  
+
         ```C#
         public ParticleSystem particleSystem;
         private ParticleSystem.Particle[] particleArray;
@@ -67,6 +68,7 @@
         ```
     - 粒子系统运作  
     更新粒子角度值，重新计算位置，实现旋转效果  
+    
         ```C#
         void Update()
         {
