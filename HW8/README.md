@@ -2,7 +2,7 @@
 
 ### 文件说明
 
-- 代码放在 [Halo/Assets/Scripts](https://github.com/guojj33/Unity3DLearning/tree/master/HW8/Halo/Asset/scripts) 中
+- 代码放在 [Halo/Assets/Scripts](https://github.com/guojj33/Unity3DLearning/tree/master/HW8/Halo/Assets/scripts) 中
 - 工程下载到本地后，双击 Halo/Assets/1.unity 即可打开工程
 
 ### 制作过程
