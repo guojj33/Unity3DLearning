@@ -57,10 +57,10 @@
 
 #### 2. 使用 UGUI
 - 创建一个 Capsule 作为人物，添加 Canvas 子对象，在 Canvas 上添加 Slider 子对象  
-![](assets/1.png)
+![](assets/1.PNG)
 
 - 将 Slider 的 Handle Slide Area 取消激活，将 Fill Area 的 Fill 的 Image 组件的颜色改称红色，就可以得到血条效果  
-![](assets/2.png)
+![](assets/2.PNG)
 
 - 给 Capsule 添加控制移动脚本，Capsule 可以在 XOZ 平面上移动  
     ```C#
