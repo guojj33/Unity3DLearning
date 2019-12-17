@@ -62,4 +62,4 @@
     ```
 
 - 运行游戏  
-    ![](assets/4.JPG)
+    ![](assets/4.jpg)
